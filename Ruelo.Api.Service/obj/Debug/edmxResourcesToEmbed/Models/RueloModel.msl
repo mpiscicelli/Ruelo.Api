@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="RueloModelStoreContainer" CdmEntityContainer="RueloEntities">
+    <EntitySetMapping Name="Marca">
+      <EntityTypeMapping TypeName="RueloModel.Marca">
+        <MappingFragment StoreEntitySet="Marca">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Producto">
+      <EntityTypeMapping TypeName="RueloModel.Producto">
+        <MappingFragment StoreEntitySet="Producto">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdMarca" ColumnName="IdMarca" />
+          <ScalarProperty Name="IdTipoArticulo" ColumnName="IdTipoArticulo" />
+          <ScalarProperty Name="IdRubro" ColumnName="IdRubro" />
+          <ScalarProperty Name="IdSubrubro" ColumnName="IdSubrubro" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="CodigoAlternativo" ColumnName="CodigoAlternativo" />
+          <ScalarProperty Name="Bloqueado" ColumnName="Bloqueado" />
+          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Rubro">
+      <EntityTypeMapping TypeName="RueloModel.Rubro">
+        <MappingFragment StoreEntitySet="Rubro">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Subrubro">
+      <EntityTypeMapping TypeName="RueloModel.Subrubro">
+        <MappingFragment StoreEntitySet="Subrubro">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoArticulo">
+      <EntityTypeMapping TypeName="RueloModel.TipoArticulo">
+        <MappingFragment StoreEntitySet="TipoArticulo">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

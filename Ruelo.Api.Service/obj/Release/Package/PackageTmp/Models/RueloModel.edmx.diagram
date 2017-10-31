@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3be8c76811664765a05f55e00a0233e2" Name="Diagram1">
+        <EntityTypeShape EntityType="RueloModel.Marca" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="RueloModel.Producto" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="RueloModel.Rubro" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="RueloModel.Subrubro" Width="1.5" PointX="0.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="RueloModel.TipoArticulo" Width="1.5" PointX="0.75" PointY="9.875" IsExpanded="true" />
+        <AssociationConnector Association="RueloModel.FK_Producto_Marca" ManuallyRouted="false" />
+        <AssociationConnector Association="RueloModel.FK_Producto_Rubro" ManuallyRouted="false" />
+        <AssociationConnector Association="RueloModel.FK_Producto_Subrubro" ManuallyRouted="false" />
+        <AssociationConnector Association="RueloModel.FK_Producto_TipoArticulo" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

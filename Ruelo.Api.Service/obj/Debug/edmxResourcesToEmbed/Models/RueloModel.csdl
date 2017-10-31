@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RueloModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Marca">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Imagen" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Producto" Relationship="Self.FK_Producto_Marca" FromRole="Marca" ToRole="Producto" />
+  </EntityType>
+  <EntityType Name="Producto">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdMarca" Type="Int64" Nullable="false" />
+    <Property Name="IdTipoArticulo" Type="Int64" Nullable="false" />
+    <Property Name="IdRubro" Type="Int64" Nullable="false" />
+    <Property Name="IdSubrubro" Type="Int64" />
+    <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CodigoAlternativo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Bloqueado" Type="Boolean" />
+    <Property Name="Imagen" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Marca" Relationship="Self.FK_Producto_Marca" FromRole="Producto" ToRole="Marca" />
+    <NavigationProperty Name="Rubro" Relationship="Self.FK_Producto_Rubro" FromRole="Producto" ToRole="Rubro" />
+    <NavigationProperty Name="Subrubro" Relationship="Self.FK_Producto_Subrubro" FromRole="Producto" ToRole="Subrubro" />
+    <NavigationProperty Name="TipoArticulo" Relationship="Self.FK_Producto_TipoArticulo" FromRole="Producto" ToRole="TipoArticulo" />
+  </EntityType>
+  <EntityType Name="Rubro">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Producto" Relationship="Self.FK_Producto_Rubro" FromRole="Rubro" ToRole="Producto" />
+  </EntityType>
+  <EntityType Name="Subrubro">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Producto" Relationship="Self.FK_Producto_Subrubro" FromRole="Subrubro" ToRole="Producto" />
+  </EntityType>
+  <EntityType Name="TipoArticulo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Producto" Relationship="Self.FK_Producto_TipoArticulo" FromRole="TipoArticulo" ToRole="Producto" />
+  </EntityType>
+  <Association Name="FK_Producto_Marca">
+    <End Role="Marca" Type="Self.Marca" Multiplicity="1" />
+    <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Marca">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Producto">
+        <PropertyRef Name="IdMarca" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Producto_Rubro">
+    <End Role="Rubro" Type="Self.Rubro" Multiplicity="1" />
+    <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rubro">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Producto">
+        <PropertyRef Name="IdRubro" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Producto_Subrubro">
+    <End Role="Subrubro" Type="Self.Subrubro" Multiplicity="0..1" />
+    <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subrubro">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Producto">
+        <PropertyRef Name="IdSubrubro" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Producto_TipoArticulo">
+    <End Role="TipoArticulo" Type="Self.TipoArticulo" Multiplicity="1" />
+    <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoArticulo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Producto">
+        <PropertyRef Name="IdTipoArticulo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="RueloEntities" annotation:LazyLoadingEnabled="false">
+    <EntitySet Name="Marca" EntityType="Self.Marca" />
+    <EntitySet Name="Producto" EntityType="Self.Producto" />
+    <EntitySet Name="Rubro" EntityType="Self.Rubro" />
+    <EntitySet Name="Subrubro" EntityType="Self.Subrubro" />
+    <EntitySet Name="TipoArticulo" EntityType="Self.TipoArticulo" />
+    <AssociationSet Name="FK_Producto_Marca" Association="Self.FK_Producto_Marca">
+      <End Role="Marca" EntitySet="Marca" />
+      <End Role="Producto" EntitySet="Producto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Producto_Rubro" Association="Self.FK_Producto_Rubro">
+      <End Role="Rubro" EntitySet="Rubro" />
+      <End Role="Producto" EntitySet="Producto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Producto_Subrubro" Association="Self.FK_Producto_Subrubro">
+      <End Role="Subrubro" EntitySet="Subrubro" />
+      <End Role="Producto" EntitySet="Producto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Producto_TipoArticulo" Association="Self.FK_Producto_TipoArticulo">
+      <End Role="TipoArticulo" EntitySet="TipoArticulo" />
+      <End Role="Producto" EntitySet="Producto" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
