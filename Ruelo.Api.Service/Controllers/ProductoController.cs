@@ -25,16 +25,50 @@ namespace WebApiEntityFrame.Controllers
 
         // GET: api/Producto/5
         //[ResponseType(typeof(Producto))]
-        [ResponseType(typeof(String))]
+        [Route("api/producto/{id}")]
         public IHttpActionResult GetProducto(int id)
         {
-            Producto Producto = db.Producto.Find(id);
-            if (Producto == null)
+            if (Request.GetQueryNameValuePairs() != null)
             {
-                return NotFound();
-            }
+                var qryStrings = Request.GetQueryNameValuePairs().ToList();
+                id = int.Parse(qryStrings[0].Value);
+                string Descripcion = "";//qryStrings[1].Value;
+                string Codigo = "";//qryStrings[2].Value;
+                long IdMarca = long.Parse(qryStrings[3].Value);
+                long IdRubro = long.Parse(qryStrings[4].Value);
+                long IdSubrubro = long.Parse(qryStrings[5].Value);
 
-            return Ok(Producto);
+                IEnumerable<ProductoLista> productos = (from produ in db.Producto
+                                                        where ((id == 0 || produ.Id == id)
+                                                                && (Descripcion == "" || produ.Descripcion.Contains(Descripcion))
+                                                                && (Codigo == "" || produ.Codigo == Codigo)
+                                                                && (IdRubro == 0 || produ.IdRubro == IdRubro)
+                                                                && (IdMarca == 0 || produ.IdMarca == IdMarca)
+                                                                && (IdSubrubro == 0 || produ.IdSubrubro == IdSubrubro)
+                                                               )
+                                                        select new ProductoLista
+                                                        {
+                                                            Id = produ.Id,
+                                                            Descripcion = produ.Descripcion,
+                                                            Marca = produ.Marca.Descripcion
+                                                        }).ToList();
+
+                foreach (ProductoLista pl in productos)
+                {
+                    pl.urlImage = string.Format("{0}{1}.png", WebConfigurationManager.AppSettings["UrlImages"], pl.Id.ToString());
+                }
+                return Ok(productos);
+            }
+            else
+            {
+                Producto Producto = db.Producto.Find(id);
+                if (Producto == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(Producto);
+            }
             //return Ok("{name: Catalago}");
         }
 
@@ -55,29 +89,70 @@ namespace WebApiEntityFrame.Controllers
         //    //                    select comprobante).ToList();
 
         //}
-        [Route("api/producto/{id}")]
-        public IEnumerable<ProductoLista> Get(ProductosFilters pf)
+        //[Route("api/producto/{pf}")]
+        //public HttpResponseMessage Get1(ProductosFilters pf)
+        //{
+        //    IEnumerable<ProductoLista> productos = (from produ in db.Producto
+        //                                            where ((pf.Id == 0 || produ.Id == pf.Id)
+        //                                                    && (pf.Descripcion == "" || produ.Descripcion.Contains(pf.Descripcion))
+        //                                                    && (pf.Codigo == "" || produ.Codigo == pf.Codigo)
+        //                                                    && (pf.IdRubro == 0 || produ.IdRubro == pf.IdRubro)
+        //                                                    && (pf.IdMarca == 0 || produ.IdMarca == pf.IdMarca)
+        //                                                    && (pf.IdSubrubro == 0 || produ.IdSubrubro == pf.IdSubrubro)
+        //                                                   )
+        //                                            select new ProductoLista
+        //                                            {
+        //                                                Id = produ.Id,
+        //                                                Descripcion = produ.Descripcion,
+        //                                                Marca = produ.Marca.Descripcion
+        //                                            }).ToList();
+
+        //    foreach (ProductoLista pl in productos)
+        //    {
+        //        pl.urlImage = string.Format("{0}{1}.png", WebConfigurationManager.AppSettings["UrlImages"], pl.Id.ToString());
+        //    }
+        //    return new HttpResponseMessage();
+
+        //}
+
+        //[HttpPost]
+        //public string PostAlbum(Album album)
+        //{
+        //    return String.Format("{0} {1:d}", album.AlbumName, album.Entered);
+        //}
+
+        [HttpPost]
+        public string PostProducto(ProductosFilters pf)
         {
+            var qryStrings = Request.GetQueryNameValuePairs().ToList();
+
+            long id = long.Parse(qryStrings[0].Value);
+            string Descripcion = qryStrings[1].Value;
+            string Codigo = qryStrings[2].Value;
+            long IdMarca = long.Parse(qryStrings[3].Value);
+            long IdRubro = long.Parse(qryStrings[4].Value);
+            long IdSubrubro = long.Parse(qryStrings[5].Value);
+
             IEnumerable<ProductoLista> productos = (from produ in db.Producto
-                                               where ((pf.Id == 0 || produ.Id == pf.Id)
-                                                       && (pf.Descripcion == "" || produ.Descripcion.Contains(pf.Descripcion))
-                                                       && (pf.Codigo == "" || produ.Codigo == pf.Codigo)
-                                                       && (pf.IdRubro == 0 || produ.IdRubro == pf.IdRubro)
-                                                       && (pf.IdMarca == 0 || produ.IdMarca == pf.IdMarca)
-                                                       && (pf.IdSubrubro == 0 || produ.IdSubrubro == pf.IdSubrubro)
-                                                      )
-                                               select new ProductoLista{
-                                                   Id = produ.Id,
-                                                   Descripcion = produ.Descripcion,
-                                                   Marca = produ.Marca.Descripcion
-                                               } ).ToList();
+                                                    where ((pf.Id == 0 || produ.Id == pf.Id)
+                                                            //&& (pf.Descripcion == "" || produ.Descripcion.Contains(pf.Descripcion))
+                                                            //&& (pf.Codigo == "" || produ.Codigo == pf.Codigo)
+                                                            && (pf.IdRubro == 0 || produ.IdRubro == pf.IdRubro)
+                                                            && (pf.IdMarca == 0 || produ.IdMarca == pf.IdMarca)
+                                                            && (pf.IdSubrubro == 0 || produ.IdSubrubro == pf.IdSubrubro)
+                                                           )
+                                                    select new ProductoLista
+                                                    {
+                                                        Id = produ.Id,
+                                                        Descripcion = produ.Descripcion,
+                                                        Marca = produ.Marca.Descripcion
+                                                    }).ToList();
 
             foreach (ProductoLista pl in productos)
             {
-                pl.urlImage = string.Format("{0}{1}.png", WebConfigurationManager.AppSettings["UrlImages"],pl.Id.ToString());
-            } 
-            return productos;
-            
+                pl.urlImage = string.Format("{0}{1}.png", WebConfigurationManager.AppSettings["UrlImages"], pl.Id.ToString());
+            }
+            return productos.ToString();
         }
 
         public class ProductosFilters

@@ -20,35 +20,37 @@
     <script>
         var uri = 'api/producto';
         //(long id, string descripcion, string codigo, long idRubro, long idMarca, long idSubrubro)
-    $(document).ready(function () {
-      // Send an AJAX request
-        $.getJSON(uri + '/0/""/""/0/3/0')
-          .done(function (data) {
-            // On success, 'data' contains a list of products.
-            $.each(data, function (key, item) {
-              // Add a list item for the product.
-              $('<li>', { text: formatItem(item) + item}).appendTo($('#products'));
-            });
-          });
-    });
+        $(document).ready(function () {
+            var id = 0;
+            // Send an AJAX request
+            $.getJSON(uri + '/' + id + '?Id=0&Descripcion=""&Codigo=""&IdMarca=3&IdRubro=0&IdSubrubro=0')
+              .done(function (data) {
+                  // On success, 'data' contains a list of products.
+                  $.each(data, function (key, item) {
+                      // Add a list item for the product.
+                      $('<li>', { text: formatItem(item) }).appendTo($('#products'));
+                  });
+              });
+        });
 
-    function formatItem(item) {
-      return item.Descripcion + ' ' + item.urlImage;
-    }
 
-    function find() {
-      var id = $('#prodId').val();
-      $.getJSON(uri + '/' + id)
-          .done(function (data) {
-              $('#product').text(formatItem(data));
+        function formatItem(item) {
+            return item.Descripcion + ' ' + item.urlImage;
+        }
 
-          })
-          .fail(function (jqXHR, textStatus, err) {
-            $('#product').text('Error: ' + err);
-          });
-    }
+        function find() {
+            var id = $('#prodId').val();
+            $.getJSON(uri + '/' + id + '?Id=0&Descripcion=""&Codigo=""&IdMarca=3&IdRubro=0&IdSubrubro=0')
+                .done(function (data) {
+                    $('#product').text(formatItem(data));
 
-    
+                })
+                .fail(function (jqXHR, textStatus, err) {
+                    $('#product').text('Error: ' + err);
+                });
+        }
+
+
     </script>
 </body>
 </html>
