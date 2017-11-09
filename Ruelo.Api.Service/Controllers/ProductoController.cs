@@ -31,33 +31,42 @@ namespace WebApiEntityFrame.Controllers
             if (Request.GetQueryNameValuePairs() != null)
             {
                 var qryStrings = Request.GetQueryNameValuePairs().ToList();
-                id = int.Parse(qryStrings[0].Value);
-                string Descripcion = "";//qryStrings[1].Value;
-                string Codigo = "";//qryStrings[2].Value;
-                long IdMarca = long.Parse(qryStrings[3].Value);
-                long IdRubro = long.Parse(qryStrings[4].Value);
-                long IdSubrubro = long.Parse(qryStrings[5].Value);
-
-                IEnumerable<ProductoLista> productos = (from produ in db.Producto
-                                                        where ((id == 0 || produ.Id == id)
-                                                                && (Descripcion == "" || produ.Descripcion.Contains(Descripcion))
-                                                                && (Codigo == "" || produ.Codigo == Codigo)
-                                                                && (IdRubro == 0 || produ.IdRubro == IdRubro)
-                                                                && (IdMarca == 0 || produ.IdMarca == IdMarca)
-                                                                && (IdSubrubro == 0 || produ.IdSubrubro == IdSubrubro)
-                                                               )
-                                                        select new ProductoLista
-                                                        {
-                                                            Id = produ.Id,
-                                                            Descripcion = produ.Descripcion,
-                                                            Marca = produ.Marca.Descripcion
-                                                        }).ToList();
-
-                foreach (ProductoLista pl in productos)
+                List<int> ids = (qryStrings.ToList().Where(q => q.Key == ("Id")).Select(q => int.Parse(q.Value))).ToList();
+                string Descripcion = qryStrings.Find(q => q.Key == "Descripcion").Value;//qryStrings[1].Value;
+                string Codigo = qryStrings.Find(q => q.Key == "Codigo").Value;//qryStrings[2].Value;
+                List<long> IdMarca = (qryStrings.ToList().Where(q => q.Key == ("IdMarca")).Select(q => long.Parse(q.Value))).ToList();
+                List<long> IdRubro = (qryStrings.ToList().Where(q => q.Key == ("IdRubro")).Select(q => long.Parse(q.Value))).ToList();
+                List<long> IdSubrubro = (qryStrings.ToList().Where(q => q.Key == ("IdSubrubro")).Select(q => long.Parse(q.Value))).ToList();
+                IEnumerable<ProductoLista> productos;
+                try
                 {
-                    pl.urlImage = string.Format("{0}{1}.png", WebConfigurationManager.AppSettings["UrlImages"], pl.Id.ToString());
+                    productos = (from produ in db.Producto
+                                 where ((id == 0 || produ.Id == (long)id)
+                                         && (Descripcion == "\"\"" || produ.Descripcion.Contains(Descripcion))
+                                         && (Codigo == "\"\"" || produ.Codigo.Contains(Codigo))
+                                         && (IdRubro.Count == 0 || IdRubro.Contains(produ.IdRubro))
+                                         && (IdMarca.Count == 0 || IdMarca.Contains(produ.IdMarca))
+                                         && (IdSubrubro.Count == 0 || IdSubrubro.Contains((long)produ.IdSubrubro))
+                                        )
+                                 select new ProductoLista
+                                 {
+                                     Id = produ.Id,
+                                     Descripcion = produ.Descripcion,
+                                     Marca = produ.Marca.Descripcion
+                                 }).ToList();
+
+
+                    foreach (ProductoLista pl in productos)
+                    {
+                        pl.urlImage = string.Format("{0}{1}.png", WebConfigurationManager.AppSettings["UrlImages"], pl.Id.ToString());
+                    }
+
+                    return Ok(productos);
                 }
-                return Ok(productos);
+                catch (Exception ex)
+                {
+                    return NotFound();
+                }
             }
             else
             {

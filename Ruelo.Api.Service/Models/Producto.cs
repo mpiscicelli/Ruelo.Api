@@ -11,8 +11,7 @@ namespace Ruelo.Api.Service.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.Web.Configuration;
-
+    
     public partial class Producto
     {
         public long Id { get; set; }
@@ -24,19 +23,10 @@ namespace Ruelo.Api.Service.Models
         public string Codigo { get; set; }
         public string CodigoAlternativo { get; set; }
         public Nullable<bool> Bloqueado { get; set; }
-        public string Imagen { get; set; }
-
+    
         public virtual Marca Marca { get; set; }
         public virtual Rubro Rubro { get; set; }
         public virtual Subrubro Subrubro { get; set; }
         public virtual TipoArticulo TipoArticulo { get; set; }
-
-        public virtual string urlImage
-        {
-            get
-            {
-                return string.Format("{0}{1}{2}",WebConfigurationManager.AppSettings["UrlImages"], Id.ToString(),".png");
-            }
-        }
     }
 }

@@ -8,7 +8,7 @@
         <EntityTypeShape EntityType="RueloModel.Marca" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
         <EntityTypeShape EntityType="RueloModel.Producto" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="RueloModel.Rubro" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="RueloModel.Subrubro" Width="1.5" PointX="0.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="RueloModel.Subrubro" Width="2.25" PointX="1.125" PointY="7.5" IsExpanded="true" />
         <EntityTypeShape EntityType="RueloModel.TipoArticulo" Width="1.5" PointX="0.75" PointY="9.875" IsExpanded="true" />
         <AssociationConnector Association="RueloModel.FK_Producto_Marca" ManuallyRouted="false" />
         <AssociationConnector Association="RueloModel.FK_Producto_Rubro" ManuallyRouted="false" />

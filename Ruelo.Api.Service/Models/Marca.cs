@@ -21,10 +21,7 @@ namespace Ruelo.Api.Service.Models
     
         public long Id { get; set; }
         public string Descripcion { get; set; }
-        public string Imagen { get; set; }
     
-        public string MarcaDescripcion { get { return Descripcion; } }
-
         public virtual ICollection<Producto> Producto { get; set; }
     }
 }

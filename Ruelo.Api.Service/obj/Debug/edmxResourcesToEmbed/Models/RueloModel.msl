@@ -6,7 +6,6 @@
         <MappingFragment StoreEntitySet="Marca">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -22,7 +21,6 @@
           <ScalarProperty Name="Codigo" ColumnName="Codigo" />
           <ScalarProperty Name="CodigoAlternativo" ColumnName="CodigoAlternativo" />
           <ScalarProperty Name="Bloqueado" ColumnName="Bloqueado" />
-          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

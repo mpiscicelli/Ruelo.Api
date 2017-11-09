@@ -17,9 +17,20 @@ namespace WebApiEntityFrame.Controllers
         private RueloEntities db = new RueloEntities();
 
         // GET: api/Rubro
-        public IQueryable<Rubro> GetRubro()
+        public IHttpActionResult GetRubro()
         {
-            return db.Rubro;
+         return Ok(from rubro in db.Rubro
+                                     select new Lista
+                                     {
+                                         id = rubro.Id,
+                                         name= rubro.Descripcion
+                                     });
+        }
+
+        class Lista
+        {
+            public Int64 id { get; set; }
+            public string name { get; set; }
         }
 
         // GET: api/Rubro/5

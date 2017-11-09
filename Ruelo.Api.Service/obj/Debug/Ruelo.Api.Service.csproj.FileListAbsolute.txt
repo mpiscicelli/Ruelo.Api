@@ -1,4 +1,3 @@
-C:\Proyectos\Personales\Ruelo\APIService\Ruelo.Api.Service\Ruelo.Api.Service\obj\Debug\Ruelo.Api.Service.csprojResolveAssemblyReference.cache
 C:\Proyectos\Personales\Ruelo\APIService\Ruelo.Api.Service\Ruelo.Api.Service\bin\ApplicationInsights.config
 C:\Proyectos\Personales\Ruelo\APIService\Ruelo.Api.Service\Ruelo.Api.Service\bin\roslyn\csc.exe
 C:\Proyectos\Personales\Ruelo\APIService\Ruelo.Api.Service\Ruelo.Api.Service\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
@@ -42,5 +41,6 @@ C:\Proyectos\Personales\Ruelo\APIService\Ruelo.Api.Service\Ruelo.Api.Service\bin
 C:\Proyectos\Personales\Ruelo\APIService\Ruelo.Api.Service\Ruelo.Api.Service\bin\es\System.Net.Http.Formatting.resources.dll
 C:\Proyectos\Personales\Ruelo\APIService\Ruelo.Api.Service\Ruelo.Api.Service\bin\es\System.Web.Http.resources.dll
 C:\Proyectos\Personales\Ruelo\APIService\Ruelo.Api.Service\Ruelo.Api.Service\bin\es\System.Web.Http.WebHost.resources.dll
+C:\Proyectos\Personales\Ruelo\APIService\Ruelo.Api.Service\Ruelo.Api.Service\obj\Debug\Ruelo.Api.Service.csprojResolveAssemblyReference.cache
 C:\Proyectos\Personales\Ruelo\APIService\Ruelo.Api.Service\Ruelo.Api.Service\obj\Debug\Ruelo.Api.Service.dll
 C:\Proyectos\Personales\Ruelo\APIService\Ruelo.Api.Service\Ruelo.Api.Service\obj\Debug\Ruelo.Api.Service.pdb

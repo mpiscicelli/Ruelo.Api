@@ -21,7 +21,6 @@
     <Property Name="Codigo" Type="varchar" MaxLength="50" />
     <Property Name="CodigoAlternativo" Type="varchar" MaxLength="50" />
     <Property Name="Bloqueado" Type="bit" />
-    <Property Name="Imagen" Type="varchar(max)" />
   </EntityType>
   <EntityType Name="Rubro">
     <Key>

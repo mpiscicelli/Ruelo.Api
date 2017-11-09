@@ -17,9 +17,20 @@ namespace WebApiEntityFrame.Controllers
         private RueloEntities db = new RueloEntities();
 
         // GET: api/Marca
-        public IQueryable<Marca> GetMarca()
+        public IHttpActionResult GetMarca()
         {
-            return db.Marca;
+            return Ok(from marca in db.Marca
+                                                    select new MarcaLista
+                                                    {
+                                                        id = marca.Id,
+                                                        name = marca.Descripcion
+                                                    });
+        }
+
+        class MarcaLista
+        {
+            public Int64 id { get; set; }
+            public string name { get; set; }
         }
 
         // GET: api/Marca/5
@@ -115,4 +126,6 @@ namespace WebApiEntityFrame.Controllers
         //    return db.Marca.Count(e => e.C_id == id) > 0;
         //}
     }
+
+     
 }

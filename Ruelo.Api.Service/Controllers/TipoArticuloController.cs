@@ -15,13 +15,23 @@ namespace WebApiEntityFrame.Controllers
     public class TipoArticuloController : ApiController
     {
         private RueloEntities db = new RueloEntities();
-        
+
         // GET: api/TipoArticulo
-        public IQueryable<TipoArticulo> GetTipoArticulo()
+        public IHttpActionResult GetTipoArticulo()
         {
-            return db.TipoArticulo;
+            return Ok(from tipoArticulo in db.TipoArticulo
+                      select new Lista
+                      {
+                          id = tipoArticulo.Id,
+                          name = tipoArticulo.Descripcion
+                      });
         }
 
+        class Lista
+        {
+            public Int64 id { get; set; }
+            public string name { get; set; }
+        }
         // GET: api/TipoArticulo/5
         [ResponseType(typeof(TipoArticulo))]
         public IHttpActionResult GetTipoArticulo(long id)
