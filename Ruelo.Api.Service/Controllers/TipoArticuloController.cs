@@ -19,19 +19,14 @@ namespace WebApiEntityFrame.Controllers
         // GET: api/TipoArticulo
         public IHttpActionResult GetTipoArticulo()
         {
-            return Ok(from tipoArticulo in db.TipoArticulo
-                      select new Lista
+            return Ok(from tipoArticulo in db.TipoArticulo.OrderBy(o => o.Descripcion)
+                      select new ListaRequest
                       {
                           id = tipoArticulo.Id,
                           name = tipoArticulo.Descripcion
                       });
         }
 
-        class Lista
-        {
-            public Int64 id { get; set; }
-            public string name { get; set; }
-        }
         // GET: api/TipoArticulo/5
         [ResponseType(typeof(TipoArticulo))]
         public IHttpActionResult GetTipoArticulo(long id)

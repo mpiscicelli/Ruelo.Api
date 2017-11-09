@@ -19,18 +19,12 @@ namespace WebApiEntityFrame.Controllers
         // GET: api/Marca
         public IHttpActionResult GetMarca()
         {
-            return Ok(from marca in db.Marca
-                                                    select new MarcaLista
+            return Ok(from marca in db.Marca.OrderBy(o => o.Descripcion)
+                                                    select new ListaRequest
                                                     {
                                                         id = marca.Id,
                                                         name = marca.Descripcion
-                                                    });
-        }
-
-        class MarcaLista
-        {
-            public Int64 id { get; set; }
-            public string name { get; set; }
+                                                    }) ;
         }
 
         // GET: api/Marca/5

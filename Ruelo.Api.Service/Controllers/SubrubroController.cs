@@ -19,18 +19,12 @@ namespace WebApiEntityFrame.Controllers
         // GET: api/Subrubro
         public IHttpActionResult GetSubrubro()
         {
-            return Ok(from subrubro in db.Subrubro
-                      select new Lista
+            return Ok(from subrubro in db.Subrubro.OrderBy(o => o.Descripcion)
+                      select new ListaRequest
                       {
                           id = subrubro.Id,
                           name = subrubro.Descripcion
                       });
-        }
-
-        class Lista
-        {
-            public Int64 id { get; set; }
-            public string name { get; set; }
         }
 
         // GET: api/Subrubro/5
